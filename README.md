@@ -15,5 +15,17 @@ This repository consists of Terraform template modules to create F5CXC blindfold
 ## Blindfold module usage example
 
 ````hcl
+module "blindfold" {
+  source                                 = "./modules/f5xc/blindfold"
+  f5xc_tenant                            = var.f5xc_tenant
+  f5xc_api_url                           = var.f5xc_api_url
+  f5xc_api_token                         = var.f5xc_api_token
+  f5xc_namespace                         = var.f5xc_namespace
+  f5xc_blindfold_secret_policy_name      = format("%s-ver-secret-policy-%s", var.project_prefix, var.project_suffix)
+  f5xc_blindfold_secret_policy_rule_name = format("%s-ver-secret-policy-rule-%s", var.project_prefix, var.project_suffix)
+}
 
+output "blindfold" {
+  value = module.blindfold.blindfold
+}
 ````
