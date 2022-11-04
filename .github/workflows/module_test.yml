@@ -30,6 +30,7 @@ jobs:
         id: setup_env
         run: |
           cp main.tf.example main.tf
+          cp variables.tf.example variables.tf
       - name: Setup Terraform
         id: setup_tf
         uses: hashicorp/setup-terraform@v2
@@ -49,11 +50,6 @@ jobs:
         run: terraform init
       - name: Terraform Validate
         id: validate
-        env:
-          TF_VAR_f5xc_api_url: ${{ secrets.F5XC_API_URL }}
-          TF_VAR_f5xc_api_token: ${{ secrets.F5XC_API_TOKEN }}
-          TF_TOKEN_app_terraform_io: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO }}
-          TF_VAR_f5xc_tenant: ${{ secrets.F5XC_TENANT }}
         run: terraform validate -no-color
   f5-xc-blindfold-module-plan:
     runs-on: ubuntu-latest
@@ -84,6 +80,7 @@ jobs:
         id: setup_env
         run: |
           cp main.tf.example main.tf
+          cp variables.tf.example variables.tf
       - name: Setup Terraform
         id: setup_tf
         uses: hashicorp/setup-terraform@v2
@@ -108,6 +105,7 @@ jobs:
         id: cleanup_env
         run: |
           rm main.tf
+          rm variables.tf
       - run: echo "This job's status is ${{ job.status }}."
   f5-xc-blindfold-module-apply:
     runs-on: ubuntu-latest
@@ -138,6 +136,7 @@ jobs:
         id: setup_env
         run: |
           cp main.tf.example main.tf
+          cp variables.tf.example variables.tf
       - name: Setup Terraform
         id: setup_tf
         uses: hashicorp/setup-terraform@v2
@@ -162,6 +161,7 @@ jobs:
         id: cleanup_env
         run: |
           rm main.tf
+          rm variables.tf
       - run: echo "This job's status is ${{ job.status }}."
   f5-xc-blindfold-module-destroy:
     runs-on: ubuntu-latest
@@ -192,6 +192,7 @@ jobs:
         id: setup_env
         run: |
           cp main.tf.example main.tf
+          cp variables.tf.example variables.tf
       - name: Setup Terraform
         id: setup_tf
         uses: hashicorp/setup-terraform@v2
@@ -216,4 +217,5 @@ jobs:
         id: cleanup_env
         run: |
           rm main.tf
+          rm variables.tf
       - run: echo "This job's status is ${{ job.status }}."
